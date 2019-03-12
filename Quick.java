@@ -36,6 +36,7 @@ public class Quick {
      int temp = data[start];
      data[r] = temp;
      data[0] = pivot;
+     start ++; 
      while (start < data.length && start != end ) {
        if (start == end) {
          int s = data [start];
