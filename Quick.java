@@ -19,8 +19,8 @@ public class Quick {
        else {
          int e = data [end];
          int now = data[start];
-         data[end] = start;
-         data [start] = end;
+         data[end] = now ;
+         data [start] = e;
          end --;
        }
      }
@@ -28,10 +28,34 @@ public class Quick {
   }
 
   public static void deBugPartition (int [] data, int start, int end) {
+    System.out.println (toString (data));
      Random rng = new Random ();
      int r = Math.abs (rng.nextInt () % data.length);
      int pivot = data [r];
      System.out.println("Pivot Value: " + pivot);
+     int temp = data[start];
+     data[r] = temp;
+     data[0] = pivot;
+     while (start < data.length && start != end ) {
+       if (start == end) {
+         int s = data [start];
+         data [start] = pivot;
+         data [r] = s;
+         System.out.println ("Answer: " + start);
+         //return r;
+       }
+       if (data[start] < pivot) {
+         start ++;
+       }
+       else {
+         int e = data [end];
+         int now = data[start];
+         data[end] = now;
+         data [start] = e;
+         end --;
+       }
+     }
+     /*
      while (start != end) {
        int now = data [start];
        if (now < pivot) {
@@ -50,6 +74,7 @@ public class Quick {
          //return start;
        }
      }
+     */
      System.out.println (toString (data));
   }
 
