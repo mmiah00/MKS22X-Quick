@@ -88,6 +88,27 @@ public class Quick {
     return ans;
   }
 
+ public static int quickselect(int[] data, int k) {
+ }
+
+ public static void quicksort(int[] data) {
+   quicksort (data, 0, data.length - 1);
+ }
+
+ private static void quicksort (int[] data, int hi, int lo) {
+   if (lo >= hi) {
+     return;
+   }
+   int pivot = partition (data,lo, hi);
+   quicksort (data, lo, pivot - 1);
+   quicksort (data, pivot + 1, hi);
+ }
+
+
+  private boolean check (int[] testing) {
+    return Array.sort (testing) == quickSort (testing);
+  }
+
   public static void main (String [] args) {
     int[] test = {8, 6, 7, 5, 3, 0, 9};
     int [] a = {2,4,7,1,3,6,12};
