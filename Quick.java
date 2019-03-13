@@ -41,20 +41,20 @@ public class Quick {
     while (start < data.length && end >= 0) {
       if (start == end) {
         int now = data[start];
-        data [0] = now;
+        data[0] = now;
         data[start] = pivot;
-        System.out.println ("Ans: " + start);
+        System.out.println ("Answer: " + start);
         break;
-      }
-      if (data[start] > pivot) {
-        int now = data[start];
-        int endVal = data[end];
-        data [start] = endVal; //swapping end and beginning
-        data [end] = now;
-        end --;
       }
       if (data[start] < pivot) {
         start ++;
+      }
+      if (data[start] > pivot) {
+        int e = data[end];
+        int s = data[start];
+        data [end] = s;
+        data[start] = e;
+        end --;
       }
     }
 
@@ -86,7 +86,7 @@ public class Quick {
     for (int i =0 ; i < data.length; i ++) {
       ans += data[i] + " ";
     }
-    return ans + " ]";
+    return ans + "]";
   }
 
   public static void main (String [] args) {
