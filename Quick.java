@@ -3,7 +3,24 @@ import java.util.Arrays;
 
 public class Quick {
 
-  public static int partition (int [] data, int start, int end) {
+  public static int quickselect(int[] data, int k) {
+    return 1;
+  }
+
+  public static void quicksort(int[] data) {
+    quicksort (data, 0, data.length - 1);
+  }
+
+  private static void quicksort (int[] data, int hi, int lo) {
+    if (lo >= hi) {
+      return;
+    }
+    int pivot = partition (data,lo, hi);
+    quicksort (data, lo, pivot - 1);
+    quicksort (data, pivot + 1, hi);
+  }
+
+  private static int partition (int [] data, int start, int end) {
     Random rng = new Random ();
     int pivIndex = Math.abs (rng.nextInt () % data.length);
     int pivot = data [pivIndex];
@@ -66,6 +83,15 @@ public class Quick {
       }
     }
      System.out.println ("Final: " + toString (data));
+  }
+
+  private boolean checkPivot (int[] data, int ans) {
+    int pivot = data[ans];
+    for (int i = 0; i < ans; i ++) {
+      if (data [i] > ans) {
+        return false; 
+      }
+    }
   }
 
 
