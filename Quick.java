@@ -34,7 +34,7 @@ public class Quick {
     return 0;
   }
 
-  public static void deBugPartition (int [] data, int start, int end) {
+  private static void deBugPartition (int [] data, int start, int end) {
     System.out.println ("Initial: " + toString (data));
     Random rng = new Random ();
     int pivIndex = Math.abs (rng.nextInt () % data.length);
@@ -68,6 +68,7 @@ public class Quick {
      System.out.println ("Final: " + toString (data));
   }
 
+
   private static String toString (int[] data) {
     String ans = "[";
     for (int i =0 ; i < data.length; i ++) {
@@ -90,7 +91,7 @@ public class Quick {
   }
 
  public static int quickselect(int[] data, int k) {
-   return 1; 
+   return 1;
  }
 
  public static void quicksort(int[] data) {
@@ -119,13 +120,11 @@ public class Quick {
     int [] a = {2,4,7,1,3,6,12};
     int [] b = {40,3,25,24,30};
     int [] c = {1,3,8,5,7,2};
-    //deBugPartition (test, 0, 6);
-    System.out.println (partition (test, 0, 6));
-    System.out.println ();
-    System.out.println (partition (a, 0, a.length - 1));
-    System.out.println ();
-    System.out.println (partition (b, 0, b.length - 1));
-    System.out.println ();
-    System.out.println (partition (c, 0, c.length - 1));
+
+    for (int i = 0; i < 5; i ++) {
+      deBugPartition (test, 0, 6);
+      System.out.println ("--------------------------------------------------------");
+    }
+
   }
 }
