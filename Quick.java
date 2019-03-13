@@ -60,55 +60,7 @@ public class Quick {
     }
      System.out.println ("Final: " + toString (data));
   }
-
-  public static int[][] viv (int [] data, int start, int end) {
-    Random rng = new Random();
-    int pivot = rng.nextInt(end-start+1) + start;
-    int index = start;
-
-    int num = data[pivot];
-    data[pivot] = data[start];
-    data[start] = num;
-    start++;
-    boolean moveLeft = true;
-
-    while (start < end) {
-      int temp = data[start];
-      if (data[start] == num) {
-        if (moveLeft) {
-          start++;
-          moveLeft = false;
-        }
-        else {
-          data[start] = data[end];
-          data[end] = temp;
-          end--;
-          moveLeft = true;
-        }
-      }
-      else if (data[start] > num) {
-        data[start] = data[end];
-        data[end] = temp;
-        end--;
-      }
-      else {
-        start++;
-      }
-    }
-
-    while (index < data.length-1 && data[index+1] <= num) {
-      index++;
-    }
-
-    data[0] = data[index];
-    data[index] = num;
-    int[][] newData = new int[2][];
-    newData[0] = data;
-    newData[1] = new int[] {index};
-
-    return newData;
-  }
-
+  
   public static String toString (int[] data) {
     String ans = "[";
     for (int i =0 ; i < data.length; i ++) {
