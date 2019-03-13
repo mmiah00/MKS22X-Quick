@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.Arrays;
 
 public class Quick {
 
@@ -89,6 +90,7 @@ public class Quick {
   }
 
  public static int quickselect(int[] data, int k) {
+   return 1; 
  }
 
  public static void quicksort(int[] data) {
@@ -106,7 +108,10 @@ public class Quick {
 
 
   private boolean check (int[] testing) {
-    return Array.sort (testing) == quickSort (testing);
+    int[] og = testing;
+    quicksort (og);
+    Arrays.sort (testing);
+    return testing == og ;
   }
 
   public static void main (String [] args) {
