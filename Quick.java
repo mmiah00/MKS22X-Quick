@@ -89,9 +89,10 @@ public class Quick {
     int pivot = data[ans];
     for (int i = 0; i < ans; i ++) {
       if (data [i] > ans) {
-        return false; 
+        return false;
       }
     }
+    return true; 
   }
 
 
@@ -115,24 +116,6 @@ public class Quick {
     ans += "]";
     return ans;
   }
-
- public static int quickselect(int[] data, int k) {
-   return 1;
- }
-
- public static void quicksort(int[] data) {
-   quicksort (data, 0, data.length - 1);
- }
-
- private static void quicksort (int[] data, int hi, int lo) {
-   if (lo >= hi) {
-     return;
-   }
-   int pivot = partition (data,lo, hi);
-   quicksort (data, lo, pivot - 1);
-   quicksort (data, pivot + 1, hi);
- }
-
 
   private boolean check (int[] testing) {
     int[] og = testing;
