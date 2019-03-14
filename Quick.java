@@ -117,7 +117,7 @@ public class Quick {
           int end = data[hi];
           data[hi] = now;
           data[lo] = end;
-          lo --;
+          hi --;
         }
         else {
           if (now < pivVal) {
