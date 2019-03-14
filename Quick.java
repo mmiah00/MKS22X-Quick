@@ -51,6 +51,7 @@ public class Quick {
     return 0;
   }
 
+  /*
   private static void deBugPartition (int [] data, int start, int end) {
     System.out.println ("Initial: " + toString (data));
     Random rng = new Random ();
@@ -84,6 +85,49 @@ public class Quick {
     }
      System.out.println ("Final: " + toString (data));
   }
+  */
+
+  private static void deBugPartition (int []data, int lo, int hi ) {
+    System.out.println ("Start: " + toString (data));
+    Random rng = new Random ();
+    int pivIndex = Math.abs (rng.nextInt () % data.length);
+    int pivVal = data[pivIndex];
+    int temp = data[lo];
+    data [lo] = pivVal;
+    data[pivIndex] = temp;
+    System.out.println ("Pivot Value: " + pivVal);
+    lo ++;
+
+    while (lo <= hi) {
+      int now = data[lo];
+      if (lo == hi) {
+        if (now > pivVal) {
+          System.out.println ("Answer: 0");
+          break;
+        }
+        else {
+          data[0]  = now;
+          data[lo] = pivVal;
+          System.out.println ("Answer: " + lo);
+          break;
+        }
+      }
+      else {
+        if (now > pivVal) {
+          int end = data[hi];
+          data[hi] = now;
+          data[lo] = end;
+          lo --;
+        }
+        else {
+          if (now < pivVal) {
+            lo ++;
+          }
+        }
+      }
+    }
+    System.out.println ("Final: " + toString (data));
+  }
 
   private boolean checkPivot (int[] data, int ans) {
     int pivot = data[ans];
@@ -92,7 +136,7 @@ public class Quick {
         return false;
       }
     }
-    return true; 
+    return true;
   }
 
 
