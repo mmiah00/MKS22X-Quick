@@ -31,34 +31,43 @@ public class Quick {
   }
 
   private static int partition (int [] data, int start, int end) {
+    //System.out.println ("Initial: " + toString (data));
     Random rng = new Random ();
     int pivIndex = Math.abs (rng.nextInt () % data.length);
     int pivot = data [pivIndex];
+    //System.out.println ("Pivot: " + pivot);
     int temp = data[start];
-    data [pivIndex] = temp;
+    data [pivIndex] = temp; //switching beginning and pivot
     data [start] = pivot;
-    start ++;
 
-    while (start < data.length && end >= 0) {
-      if (start == end) {
-        int now = data[start];
-        data[0] = now;
-        data[start] = pivot;
-        return start;
-      }
-      if (data[start] < pivot) {
-        start ++;
-      }
-      else {
-        //if (data[start] > pivot) {
-        int e = data[end];
-        int s = data[start];
-        data [end] = s;
-        data[start] = e;
+    int i = start + 1; //new variable to keep track of lo end
+
+    while (i != end) {
+      int s = data[i]; //start
+      int e = data[end]; //end
+      if (s > pivot) {
+        data[i] = e; // if bigger than pivot bring it to the end
+        data[end] = s;
         end --;
       }
+      else {
+        i ++;
+      }
     }
-    return 0;
+
+    if (data [i] > pivot) {
+      int x = data[i - 1];
+      data[i - 1] = pivot;
+      data[start] = x;
+      return i - 1;
+    }
+    else {
+      int x = data[i];
+      data [i] = pivot;
+      data[start] = x;
+      return i;
+    }
+    //System.out.println ("Final: " + toString (data));
   }
 
   private static void deBugPartition (int [] data, int start, int end) { //working on it before
@@ -98,15 +107,22 @@ public class Quick {
       data[start] = x;
       System.out.println ("Answer: " + i);
     }
-     System.out.println ("Final: " + toString (data));
+    System.out.println ("Final: " + toString (data));
   }
 
 
   private boolean checkPivot (int[] data, int ans) {
     int pivot = data[ans];
-    for (int i = 0; i < ans; i ++) {
-      if (data [i] > ans) {
-        return false;
+    for (int i = 0; i < data.length; i ++) {
+      if (i < ans){
+        if (pivot > data[i]) {
+          return false;
+        }
+      }
+      else {
+        if (pivot < data[i]) {
+          return false;
+        }
       }
     }
     return true;
@@ -147,7 +163,7 @@ public class Quick {
     int [] b = {40,3,25,24,30};
     int [] c = {1,3,8,5,7,2};
 
-    for (int i = 0; i < 5; i ++) {
+    for (int i = 0; i < 10; i ++) {
       deBugPartition(test, 0, 6);
       System.out.println ("--------------------------------------------------------");
     }
