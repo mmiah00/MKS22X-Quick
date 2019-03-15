@@ -3,10 +3,6 @@ import java.util.Arrays;
 
 public class Quick {
 
-  public static int quickselect(int[] data, int k) {
-    return 1;
-  }
-
   public static void quicksort(int[] data) {
     quicksort (data, 0, data.length - 1);
   }
@@ -18,6 +14,20 @@ public class Quick {
     int pivot = partition (data,lo, hi);
     quicksort (data, lo, pivot - 1);
     quicksort (data, pivot + 1, hi);
+  }
+
+  public static int quickselect(int[] data, int k) {
+    k -= 1;
+    int div = partition (data, 0, data.length - 1); //first division
+    while (div != k ) {
+      if (div > k) { //if k is to the right only look at the right side
+        div = partition (data, 0, div - 1); //divide only to the right
+      }
+      else {
+        div = partition (data, div + 1, data.length - 1); //else only divide values to the left
+      }
+    }
+    return data[div]; //once div == k, that kth value is in the right spot
   }
 
   private static int partition (int [] data, int start, int end) {
@@ -52,7 +62,7 @@ public class Quick {
   }
 
   /*
-  private static void deBugPartition (int [] data, int start, int end) {
+  private static void deBugPartition (int [] data, int start, int end) { //working on it before
     System.out.println ("Initial: " + toString (data));
     Random rng = new Random ();
     int pivIndex = Math.abs (rng.nextInt () % data.length);
@@ -87,47 +97,49 @@ public class Quick {
   }
   */
 
-  private static void deBugPartition (int []data, int lo, int hi ) {
-    System.out.println ("Start: " + toString (data));
+  private static void deBugPartition (int[] data, int start, int end) {
+    System.out.println ("Initial: " + toString (data));
     Random rng = new Random ();
     int pivIndex = Math.abs (rng.nextInt () % data.length);
-    int pivVal = data[pivIndex];
-    int temp = data[lo];
-    data [lo] = pivVal;
-    data[pivIndex] = temp;
-    System.out.println ("Pivot Value: " + pivVal);
-    lo ++;
-
-    while (lo <= hi) {
-      int now = data[lo];
-      if (lo == hi) {
-        if (now > pivVal) {
-          System.out.println ("Answer: 0");
-          break;
+    int pivot = data [pivIndex];
+    System.out.println ("Pivot: " + pivot);
+    int temp = data[start];
+    data [pivIndex] = temp;
+    data [start] = pivot;
+    start ++;
+    boolean right = false;
+    while (start != end) {
+      if (data[start] == pivot) {
+        if (!right) {
+          start ++;
+          right = true;
         }
         else {
-          data[0]  = now;
-          data[lo] = pivVal;
-          System.out.println ("Answer: " + lo);
+          int s = data[start];
+          int e = data[end];
+          data[start] = e;
+          right = false;
+          System.out.println ("ans: " + start) ;
           break;
         }
       }
       else {
-        if (now > pivVal) {
-          int end = data[hi];
-          data[hi] = now;
-          data[lo] = end;
-          hi --;
+        if (data[start] > pivot) {
+          int s = data[start];
+          int e = data[end];
+          data[start] = e;
+          end --;
+
         }
         else {
-          if (now < pivVal) {
-            lo ++;
-          }
+          start ++;
         }
       }
     }
     System.out.println ("Final: " + toString (data));
+
   }
+
 
   private boolean checkPivot (int[] data, int ans) {
     int pivot = data[ans];
@@ -174,9 +186,16 @@ public class Quick {
     int [] b = {40,3,25,24,30};
     int [] c = {1,3,8,5,7,2};
 
+    /*
     for (int i = 0; i < 5; i ++) {
-      deBugPartition (test, 0, 6);
+      partition(test, 0, 6);
       System.out.println ("--------------------------------------------------------");
+    }
+    */
+
+    System.out.println (toString (a));
+    for (int i = 0; i < a.length; i ++) {
+      System.out.println (quickselect (a, i + 1));
     }
 
   }
