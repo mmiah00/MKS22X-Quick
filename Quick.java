@@ -7,7 +7,7 @@ public class Quick {
     quicksort (data, 0, data.length - 1);
   }
 
-  private static void quicksort (int[] data, int hi, int lo) {
+  private static void quicksort (int[] data, int lo, int hi) {
     if (lo >= hi) {
       return;
     }
@@ -70,7 +70,7 @@ public class Quick {
     //System.out.println ("Final: " + toString (data));
   }
 
-  private static void deBugPartition (int [] data, int start, int end) { //working on it before
+  private static void deBugPartition (int [] data, int start, int end) {
     System.out.println ("Initial: " + toString (data));
     Random rng = new Random ();
     int pivIndex = Math.abs (rng.nextInt () % data.length);
@@ -111,7 +111,7 @@ public class Quick {
   }
 
 
-  private boolean checkPivot (int[] data, int ans) {
+  private static boolean checkPivot (int[] data, int ans) {
     int pivot = data[ans];
     for (int i = 0; i < data.length; i ++) {
       if (i < ans){
@@ -119,7 +119,7 @@ public class Quick {
           return false;
         }
       }
-      else {
+      if (i > ans) {
         if (pivot < data[i]) {
           return false;
         }
@@ -150,7 +150,7 @@ public class Quick {
     return ans;
   }
 
-  private boolean check (int[] testing) {
+  private static boolean check (int[] testing) {
     int[] og = testing;
     quicksort (og);
     Arrays.sort (testing);
@@ -163,10 +163,15 @@ public class Quick {
     int [] b = {40,3,25,24,30};
     int [] c = {1,3,8,5,7,2};
 
+
+    /*
     for (int i = 0; i < 10; i ++) {
-      deBugPartition(test, 0, 6);
+      deBugPartition(a, 0, 6);
       System.out.println ("--------------------------------------------------------");
     }
+    */
+    quicksort (test);
+    System.out.println (toString (test));
 
     /*
     System.out.println (toString (a));
