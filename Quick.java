@@ -61,7 +61,6 @@ public class Quick {
     return 0;
   }
 
-  /*
   private static void deBugPartition (int [] data, int start, int end) { //working on it before
     System.out.println ("Initial: " + toString (data));
     Random rng = new Random ();
@@ -71,73 +70,35 @@ public class Quick {
     int temp = data[start];
     data [pivIndex] = temp;
     data [start] = pivot;
-    start ++;
 
-    while (start < data.length && end >= 0) {
-      if (start == end) {
-        int now = data[start];
-        data[0] = now;
-        data[start] = pivot;
-        System.out.println ("Answer: " + start);
-        break;
-      }
-      if (data[start] < pivot) {
-        start ++;
-      }
-      else {
-        //if (data[start] > pivot) {
-        int e = data[end];
-        int s = data[start];
-        data [end] = s;
-        data[start] = e;
+    int i = start + 1;
+
+    while (i != end) {
+      int s = data[i];
+      int e = data[end];
+      if (s > pivot) {
+        data[i] = e;
+        data[end] = s;
         end --;
       }
+      else {
+        i ++;
+      }
+    }
+
+    if (data [i] > pivot) {
+      int x = data[i - 1];
+      data[i - 1] = pivot;
+      data[start] = x;
+      System.out.println ("Answer: " + (i - 1));
+    }
+    else {
+      int x = data[i];
+      data [i] = pivot;
+      data[start] = x;
+      System.out.println ("Answer: " + i);
     }
      System.out.println ("Final: " + toString (data));
-  }
-  */
-
-  private static void deBugPartition (int[] data, int start, int end) {
-    System.out.println ("Initial: " + toString (data));
-    Random rng = new Random ();
-    int pivIndex = Math.abs (rng.nextInt () % data.length);
-    int pivot = data [pivIndex];
-    System.out.println ("Pivot: " + pivot);
-    int temp = data[start];
-    data [pivIndex] = temp;
-    data [start] = pivot;
-    start ++;
-    boolean right = false;
-    while (start != end) {
-      if (data[start] == pivot) {
-        if (!right) {
-          start ++;
-          right = true;
-        }
-        else {
-          int s = data[start];
-          int e = data[end];
-          data[start] = e;
-          right = false;
-          System.out.println ("ans: " + start) ;
-          break;
-        }
-      }
-      else {
-        if (data[start] > pivot) {
-          int s = data[start];
-          int e = data[end];
-          data[start] = e;
-          end --;
-
-        }
-        else {
-          start ++;
-        }
-      }
-    }
-    System.out.println ("Final: " + toString (data));
-
   }
 
 
@@ -186,17 +147,17 @@ public class Quick {
     int [] b = {40,3,25,24,30};
     int [] c = {1,3,8,5,7,2};
 
-    /*
     for (int i = 0; i < 5; i ++) {
-      partition(test, 0, 6);
+      deBugPartition(test, 0, 6);
       System.out.println ("--------------------------------------------------------");
     }
-    */
 
+    /*
     System.out.println (toString (a));
     for (int i = 0; i < a.length; i ++) {
       System.out.println (quickselect (a, i + 1));
     }
+    */
 
   }
 }
