@@ -7,9 +7,45 @@ public class Quick {
     quicksort (data, 0, data.length  - 1);
   }
 
+  private static void insertionSort (int[] ary) {
+    int sortedindex = 0; //divider between assorted and not
+    while (sortedindex < ary.length) {
+      int beingsorted = ary [sortedindex];
+      for (int x = sortedindex; x >= 0; x --) { //going backwards to find the smallest
+        int now = ary [x];
+        if (now > beingsorted) {
+          ary [x + 1] = now;
+          ary [x] = beingsorted;
+        }
+      }
+      sortedindex ++;
+      //System.out.println (toString (ary));
+    }
+  }
+
+  private static void insertionSort (int[] data, int lo, int hi) {
+    int sortedindex = lo;
+    int len = hi - lo + 1;
+    while (sortedindex < len) {
+      int beingsorted = data[sortedindex];
+      for (int x = sortedindex; x >= lo; x --) {
+        int now = data[x];
+        if (now < beingsorted) {
+          data[x + 1] = now;
+          data[x] = beingsorted;
+        }
+      }
+      sortedindex ++; 
+    }
+  }
+
   private static void quicksort (int[] data, int lo, int hi) {
-    if (lo >= hi) {
+    /*if (lo >= hi) {
       return;
+    }*/
+    int len = hi - lo + 1;
+    if (len < 15) {
+      insertionSort (data, lo, hi);
     }
     int pivot = partition (data,lo, hi);
     quicksort (data, lo, pivot - 1);
