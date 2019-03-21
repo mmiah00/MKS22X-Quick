@@ -23,10 +23,10 @@ public class Quick {
     }
   }
 
-  private static void insertionSort (int[] data, int lo, int hi) {
+  /*private static void insertionSort (int[] data, int lo, int hi) {
     int sortedindex = lo;
     int len = hi - lo + 1;
-    while (sortedindex < len) {
+    while (sortedindex <= hi) {
       int beingsorted = data[sortedindex];
       for (int x = sortedindex; x >= lo; x --) {
         int now = data[x];
@@ -35,18 +35,37 @@ public class Quick {
           data[x] = beingsorted;
         }
       }
-      sortedindex ++; 
+      sortedindex ++;
+    }
+  }
+  */
+
+  private static void insertionSort(int[] data, int lo, int hi){
+    int i = lo + 1;
+    while (i <= hi){
+      int now = data[i];
+      int before = i - 1;
+      int x = 0;
+      while (before >= 0 && now < data[before]) {
+        data[i -x ] = data[before];
+        before--;
+        x ++;
+      }
+      data[before + 1] = now;
     }
   }
 
   private static void quicksort (int[] data, int lo, int hi) {
-    /*if (lo >= hi) {
+    if (lo >= hi) {
       return;
-    }*/
-    int len = hi - lo + 1;
-    if (len < 15) {
-      insertionSort (data, lo, hi);
     }
+    int len = hi - lo;
+    if (len < 50) {
+      insertionSort (data,lo,hi);
+    }
+    /*if (len < 15) {
+      insertionSort (data, lo, hi);
+    }*/
     int pivot = partition (data,lo, hi);
     quicksort (data, lo, pivot - 1);
     quicksort (data, pivot + 1, hi);
