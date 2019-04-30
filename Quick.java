@@ -204,6 +204,7 @@ public class Quick {
     return testing == og ;
   }
 
+
   /*
   public static void main (String [] args) {
     int[] test = {8, 6, 7, 5, 3, 0, 9};
